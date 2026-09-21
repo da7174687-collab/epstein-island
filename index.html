@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TraceX — privacy-first mobile number intelligence dashboard for public numbering-plan information.">
+  <title>TraceX — Mobile Number Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="orb orb-a"></div><div class="orb orb-b"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-mark">TX</span>
+      <span>Trace<span>X</span></span>
+    </a>
+    <nav>
+      <a href="#analyzer">Analyzer</a>
+      <a href="#how">How it works</a>
+      <a href="#privacy">Privacy</a>
+    </nav>
+    <a class="github" href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><span class="pulse"></span> PUBLIC NUMBERING INTELLIGENCE</div>
+      <h1>Understand a mobile number.<br><em>Without tracking a device.</em></h1>
+      <p class="hero-copy">
+        Analyze a phone number using public numbering-plan information. See country,
+        calling code, format, number type and other non-GPS metadata in a clean dashboard.
+      </p>
+      <div class="trust-row">
+        <span>◎ No device GPS</span><span>◈ No contact access</span><span>◇ Client-side demo</span>
+      </div>
+    </section>
+
+    <section id="analyzer" class="panel analyzer">
+      <div class="panel-head">
+        <div>
+          <span class="kicker">01 / NUMBER ANALYZER</span>
+          <h2>Enter a mobile number</h2>
+        </div>
+        <span class="status"><i></i> READY</span>
+      </div>
+
+      <form id="lookupForm">
+        <div class="input-wrap">
+          <span class="input-icon">＋</span>
+          <input id="phoneInput" type="tel" inputmode="tel" autocomplete="off"
+                 placeholder="+91 98765 43210" aria-label="Mobile number">
+          <button type="button" id="clearBtn" class="clear" aria-label="Clear">×</button>
+        </div>
+        <button class="analyze-btn" type="submit"><span>Analyze number</span><b>→</b></button>
+      </form>
+      <div id="message" class="message" aria-live="polite"></div>
+
+      <div class="demo-note">
+        <span>Try demo:</span>
+        <button type="button" class="demo-number" data-number="+91 98765 43210">+91 98765 43210</button>
+        <button type="button" class="demo-number" data-number="+44 7700 900123">+44 7700 900123</button>
+        <button type="button" class="demo-number" data-number="+1 202 555 0147">+1 202 555 0147</button>
+      </div>
+    </section>
+
+    <section id="results" class="results hidden">
+      <div class="result-hero">
+        <div>
+          <span class="kicker">ANALYSIS RESULT</span>
+          <h2 id="formattedNumber">—</h2>
+          <p id="resultSummary">—</p>
+        </div>
+        <div id="confidence" class="confidence">—</div>
+      </div>
+
+      <div class="cards">
+        <article class="info-card">
+          <span class="card-label">COUNTRY</span>
+          <strong id="country">—</strong>
+          <small id="countryCode">—</small>
+        </article>
+        <article class="info-card">
+          <span class="card-label">CALLING CODE</span>
+          <strong id="callingCode">—</strong>
+          <small>International prefix</small>
+        </article>
+        <article class="info-card">
+          <span class="card-label">NUMBER TYPE</span>
+          <strong id="numberType">—</strong>
+          <small>From numbering pattern</small>
+        </article>
+        <article class="info-card">
+          <span class="card-label">VALIDITY</span>
+          <strong id="validity">—</strong>
+          <small id="digits">—</small>
+        </article>
+      </div>
+
+      <div class="location-card">
+        <div class="location-copy">
+          <span class="kicker">NUMBERING REGION</span>
+          <h3 id="region">—</h3>
+          <p id="locationText">—</p>
+          <div class="chips" id="chips"></div>
+        </div>
+        <div class="map-placeholder">
+          <div class="map-lines"></div>
+          <div class="map-pin">⌖</div>
+          <span id="mapLabel">Approximate numbering area</span>
+        </div>
+      </div>
+
+      <div class="notice">
+        <span>ⓘ</span>
+        <div><b>Important:</b> a phone number does not reveal a person's live GPS location.
+          This dashboard shows numbering-plan / public metadata only. Live location requires
+          explicit access from the device or an authorized service.</div>
+      </div>
+    </section>
+
+    <section id="how" class="feature-section">
+      <div class="section-title">
+        <span class="kicker">02 / HOW IT WORKS</span>
+        <h2>Built for useful information,<br>not hidden tracking.</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature"><span>01</span><h3>Parse</h3><p>Normalizes the international phone format and extracts the calling-code structure.</p></div>
+        <div class="feature"><span>02</span><h3>Classify</h3><p>Checks local demo rules to identify country, format, type and numbering region.</p></div>
+        <div class="feature"><span>03</span><h3>Explain</h3><p>Turns raw metadata into a readable intelligence-style dashboard with clear limitations.</p></div>
+      </div>
+    </section>
+
+    <section id="privacy" class="privacy panel">
+      <div>
+        <span class="kicker">03 / PRIVACY BY DESIGN</span>
+        <h2>No device-location permission is used.</h2>
+      </div>
+      <p>This GitHub-ready demo does not request GPS, contacts, microphone, camera or SMS access.
+        For production carrier intelligence, connect an authorized phone-number API from a backend
+        and keep API credentials off the frontend.</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>TraceX © 2026</span>
+    <span>Built for GitHub Pages • Static frontend</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
